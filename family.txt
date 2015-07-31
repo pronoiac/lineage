@@ -6,10 +6,10 @@ Samuel, Kevin
 George, Kevin
 James, Kevin
 Aaron, Kevin
-Kevin,  Jill
+Kevin, Jill
 Catherine, Carl
 Joseph, Carl
 Adam, Nancy
 Jill, Nancy
 Carl, Nancy
-Nancy, null
+# Nancy, unknown
