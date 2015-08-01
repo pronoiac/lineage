@@ -1,3 +1,5 @@
+require_relative "person"
+
 class Family
     def initialize
         @family = {}
@@ -16,38 +18,3 @@ class Family
         @family[name]
     end
 end # /family
-
-class Person
-    def initialize(name)
-        @name = name
-        @parent = nil
-        @children = []
-    end
-    
-    def name
-        @name
-    end
-    
-    def parent=(rent)
-        @parent = rent
-    end
-    
-    def add_child(child_name)
-        @children << child_name
-    end
-end # /person
-
-# main
-the_fam = Family.new
-
-# let's parse the family tree
-tree_file = open("family.txt", "r")
-tree_file.each_line { |line|
-    line = line.chomp
-    next if line =~ /^#/
-    child, parent = line.split(", ")
-    puts "#{parent} begat #{child}"
-    the_fam.add_parentage(child, parent)
-}
-
-p the_fam
