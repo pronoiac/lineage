@@ -12,6 +12,6 @@ Joseph, Carl
 Adam, Nancy
 Jill, Nancy
 Carl, Nancy
-Nancy, unknown
-unknown, unknown
+#Nancy, unknown
+#unknown, unknown
 # TODO: handle this in code instead of data.
