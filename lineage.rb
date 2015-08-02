@@ -31,12 +31,7 @@ end # /menu
 
 
 def list_members()
-    results = []
-    @the_fam.list_members.each { |peep_name|
-        peep = @the_fam.lookup(peep_name)
-        results << peep.name
-    }
-    puts results.sort.join(", ")
+    puts @the_fam.list_members.sort.join(", ")
 end
 
 
