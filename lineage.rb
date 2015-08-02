@@ -17,13 +17,13 @@ tree_file.each_line { |line|
 
 def menu
     puts <<EOM
-What do you want me to do?
-    1. Given a name, I'll tell you their grandparent.
-    2. List people without siblings.
-    3. List people without children.
-    4. Tell you who has the most grandchildren.
+What do you want to know?
+    1. Someone's grandparent.
+    2. Who has no siblings?
+    3. Who has no children?
+    4. Who has the most grandchildren?
     5. Draw the family tree. (not available)
-    6 / x / q. exit
+    6. Exit (also: x and q)
 EOM
     print "Choice? "
     gets.chomp
