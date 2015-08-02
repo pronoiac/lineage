@@ -66,6 +66,19 @@ def show_grandparent()
 end
 
 
+def list_no_siblings
+    puts "Listing members without siblings."
+    results = []
+    @the_fam.list_members.each { |peep_name|
+        peep = @the_fam.lookup(peep_name)
+        rents = @the_fam.lookup(peep.parent)
+        results << peep.name if rents.children.count == 1 # only one child
+    }
+    puts results.sort.join(", ")
+
+end
+
+
 prompting = true
 while prompting
     choice = menu
@@ -73,6 +86,7 @@ while prompting
     when "1" # get grandparent for someone
         show_grandparent
     when "2" # list of no siblings
+        list_no_siblings
     when "3" # list of no children
     when "4" # who has most grandchildren?
     when "5" # draw family tree
