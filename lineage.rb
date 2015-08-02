@@ -69,9 +69,10 @@ def list_no_siblings
     results = []
     @the_fam.list_members.each { |peep_name|
         peep = @the_fam.lookup(peep_name)
-        rents = @the_fam.lookup(peep.parent)
-        results << peep.name if rents.children.count == 1 # only one child
-        # TODO: Nancy's left out here
+        rents = peep.parent
+        if rents.nil? || rents.children.count == 1
+            results << peep.name
+        end
     }
     puts results.sort.join(", ")
 end
