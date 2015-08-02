@@ -79,6 +79,17 @@ def list_no_siblings
 end
 
 
+def list_no_children
+    puts "Listing members without children."
+    results = []
+    @the_fam.list_members.each { |peep_name|
+        peep = @the_fam.lookup(peep_name)
+        results << peep.name if peep.children.empty?
+    }
+    puts results.sort.join(", ")
+end
+
+
 prompting = true
 while prompting
     choice = menu
@@ -88,6 +99,7 @@ while prompting
     when "2" # list of no siblings
         list_no_siblings
     when "3" # list of no children
+        list_no_children
     when "4" # who has most grandchildren?
     when "5" # draw family tree
     when "6", "q", "x" # exit
