@@ -90,6 +90,26 @@ def list_no_children
 end
 
 
+def biggest_grandparent
+    puts "Who has the most grandchildren?"
+    most_gc = 0
+    biggest_gp = ""
+    @the_fam.list_members.each { |peep_name|
+        gc_count = 0
+        peep = @the_fam.lookup(peep_name)
+        peep.children.each { |child_name|
+            child = @the_fam.lookup(child_name)
+            gc_count += child.children.count
+        }
+        if gc_count > most_gc
+            biggest_gp = peep_name
+            most_gc = gc_count
+        end
+    }
+    puts "#{biggest_gp} has the most grandchildren, at #{most_gc}."
+end
+
+
 prompting = true
 while prompting
     choice = menu
@@ -101,7 +121,9 @@ while prompting
     when "3" # list of no children
         list_no_children
     when "4" # who has most grandchildren?
+        biggest_grandparent
     when "5" # draw family tree
+        puts "Feature not implemented!"
     when "6", "q", "x" # exit
         puts "Exiting."
         prompting = false
