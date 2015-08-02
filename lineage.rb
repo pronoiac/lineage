@@ -3,7 +3,7 @@ require_relative "person"
 # require "byebug"
 
 # main
-the_fam = Family.new
+@the_fam = Family.new
 
 # let's parse the family tree
 tree_file = open("family.txt", "r")
@@ -12,7 +12,7 @@ tree_file.each_line { |line|
     next if line =~ /^#/
     child, parent = line.split(", ")
     # puts "#{parent} begat #{child}"
-    the_fam.add_parentage(child, parent)
+    @the_fam.add_parentage(child, parent)
 }
 
 def menu
