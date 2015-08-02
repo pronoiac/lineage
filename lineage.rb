@@ -96,8 +96,7 @@ def biggest_grandparent
     @the_fam.list_members.each { |peep_name|
         gc_count = 0
         peep = @the_fam.lookup(peep_name)
-        peep.children.each { |child_name|
-            child = @the_fam.lookup(child_name)
+        peep.children.each { |child|
             gc_count += child.children.count
         }
         if gc_count > most_gc
