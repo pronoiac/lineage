@@ -17,4 +17,13 @@ class Family
         @family[name] = Person.new(name)
         @family[name]
     end
+    
+    def list_members
+        return @family.keys
+    end
+    
+    def lookup(name)
+        return @family[name] if @family.key?(name)
+        false
+    end
 end # /family
