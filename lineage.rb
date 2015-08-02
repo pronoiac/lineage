@@ -55,9 +55,12 @@ def show_grandparent()
         end
     end # /choice
 
-    parent = @the_fam.lookup(choice.parent)
-    
-    puts "#{parent.parent} is the grandparent of #{name}.\n"
+    parent = choice.parent
+    if parent.nil? || parent.parent.nil?
+        puts "The grandparent of #{name} is unknown."
+    else
+        puts "#{parent.parent.name} is the grandparent of #{name}.\n"
+    end
 end
 
 
