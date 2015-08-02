@@ -73,9 +73,9 @@ def list_no_siblings
         peep = @the_fam.lookup(peep_name)
         rents = @the_fam.lookup(peep.parent)
         results << peep.name if rents.children.count == 1 # only one child
+        # TODO: Nancy's left out here'
     }
     puts results.sort.join(", ")
-
 end
 
 
