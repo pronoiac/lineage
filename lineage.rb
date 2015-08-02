@@ -45,12 +45,18 @@ def show_grandparent()
     choice = false
     
     while !choice
-        print "Whose grandparent do you want to know? "
+        puts "Whose grandparent do you want to know?"
+        print '("list" for family members, or enter to return to main menu) '
         name = gets.chomp
-        choice = @the_fam.lookup(name)
-        if !choice
-            puts "Unknown member. Known family members: "
+        return if name == "" # back to main menu
+        if name == "list"
+            puts "Known family members: "
             list_members
+        else 
+            choice = @the_fam.lookup(name)
+            if !choice
+                puts "Unknown member."
+            end
         end
     end # /choice
 
