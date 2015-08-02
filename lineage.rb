@@ -9,7 +9,7 @@ require_relative "person"
 tree_file = open("family.txt", "r")
 tree_file.each_line { |line|
     line = line.chomp
-    next if line =~ /^#/
+    next if line =~ /^#/ || line =~ /^\s*$/
     child, parent = line.split(", ")
     # puts "#{parent} begat #{child}"
     @the_fam.add_parentage(child, parent)
