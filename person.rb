@@ -9,7 +9,7 @@ class Person
     end
     
     
-    def add_child(child_name)
-        @children << child_name
+    def add_child(child)
+        @children << child
     end
 end # /person

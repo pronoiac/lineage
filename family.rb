@@ -8,8 +8,8 @@ class Family
     def add_parentage(child_name, parent_name)
         child = find_or_create(child_name)
         parent = find_or_create(parent_name)
-        child.parent = parent_name
-        parent.add_child(child_name)
+        child.parent = parent
+        parent.add_child(child)
     end
     
     def find_or_create(name)
