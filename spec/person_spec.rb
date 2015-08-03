@@ -1,7 +1,7 @@
 require 'rspec'
 require 'person'
 
-describe "#add_child" do
+describe "Person" do
     let(:momma) {Person.new("Momma")}
     let(:baby) {Person.new("Baby")}
 
