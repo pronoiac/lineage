@@ -1,6 +1,5 @@
 class Person
-    attr_accessor :parent
-    attr_reader :name, :children
+    attr_reader :name, :children, :parent
     
     def initialize(name)
         @name = name
@@ -10,6 +9,10 @@ class Person
     
     
     def add_child(child)
-        @children << child
+        @children << child unless @children.include?(child)
+    end
+    
+    def add_parent(parent)
+        @parent = parent
     end
 end # /person
