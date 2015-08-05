@@ -5,15 +5,17 @@ require_relative "person"
 # main
 @the_fam = Family.new
 
-# let's parse the family tree
-tree_file = open("family.txt", "r")
-tree_file.each_line { |line|
-    line = line.chomp
-    next if line =~ /^#/ || line =~ /^\s*$/
-    child, parent = line.split(", ")
-    # puts "#{parent} begat #{child}"
-    @the_fam.add_parentage(child, parent)
-}
+def parse_tree(family, filename)
+    # let's parse the family tree
+    tree_file = open("family.txt", "r")
+    tree_file.each_line { |line|
+        line = line.chomp
+        next if line =~ /^#/ || line =~ /^\s*$/
+        child, parent = line.split(", ")
+        # puts "#{parent} begat #{child}"
+        @the_fam.add_parentage(child, parent)
+    }
+end # /parse_tree
 
 def menu
     puts <<EOM
@@ -104,6 +106,7 @@ def biggest_grandparent
 end
 
 
+parse_tree(@the_fam, "family.txt")
 prompting = (__FILE__ == $0)
 # will be false if run via rspec
 while prompting
