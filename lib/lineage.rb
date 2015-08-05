@@ -18,7 +18,7 @@ tree_file.each_line { |line|
 def menu
     puts <<EOM
 What do you want to know?
-    1. Someone's grandparent.
+    1. The grandparent of someone.
     2. Who has no siblings?
     3. Who has no children?
     4. Who has the most grandchildren?
