@@ -110,7 +110,8 @@ EOM
     gets.chomp
 end # /menu
 
-parse_tree(@the_fam, "family.txt")
+fam = Lineage.new
+fam.parse_tree("family.txt")
 prompting = (__FILE__ == $0)
 # will be false if run via rspec
 while prompting
@@ -118,16 +119,16 @@ while prompting
     case choice
     when "1" # get grandparent for someone
         puts "Showing a grandparent."
-        show_grandparent
+        fam.show_grandparent
     when "2" # list of no siblings
         puts "Listing members without siblings."
-        puts list_no_siblings.sort.join(", ")
+        puts fam.list_no_siblings.sort.join(", ")
     when "3" # list of no children
         puts "Listing members without children."
-        puts list_no_children.sort.join(", ")
+        puts fam.list_no_children.sort.join(", ")
     when "4" # who has most grandchildren?
         puts "Who has the most grandchildren?"
-        biggest_gp, most_gc = biggest_grandparent
+        biggest_gp, most_gc = fam.biggest_grandparent
         puts "#{biggest_gp} has the most grandchildren, at #{most_gc}."
     when "5" # draw family tree
         puts "Feature not implemented!"
