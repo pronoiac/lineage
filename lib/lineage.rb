@@ -3,9 +3,11 @@ require_relative "person"
 # require "byebug"
 
 class Lineage
-    @the_fam = Family.new
+    def initialize
+        @@the_fam = Family.new
+    end
 
-    def parse_tree(family, filename)
+    def parse_tree(filename)
         # let's parse the family tree
         tree_file = open("family.txt", "r")
         tree_file.each_line { |line|
@@ -13,13 +15,13 @@ class Lineage
             next if line =~ /^#/ || line =~ /^\s*$/
             child, parent = line.split(", ")
             # puts "#{parent} begat #{child}"
-            @the_fam.add_parentage(child, parent)
+            @@the_fam.add_parentage(child, parent)
         }
     end # /parse_tree
 
 
     def list_members()
-        puts @the_fam.list_members.sort.join(", ")
+        puts @@the_fam.list_members.sort.join(", ")
     end
 
 
@@ -35,7 +37,7 @@ class Lineage
                 puts "Known family members: "
                 list_members
             else 
-                choice = @the_fam.lookup(name)
+                choice = @@the_fam.lookup(name)
                 if !choice
                     puts "Unknown member."
                 end
@@ -53,8 +55,8 @@ class Lineage
 
     def list_no_siblings
         results = []
-        @the_fam.list_members.each { |peep_name|
-            peep = @the_fam.lookup(peep_name)
+        @@the_fam.list_members.each { |peep_name|
+            peep = @@the_fam.lookup(peep_name)
             rents = peep.parent
             if rents.nil? || rents.children.count == 1
                 results << peep.name
@@ -66,8 +68,8 @@ class Lineage
 
     def list_no_children
         results = []
-        @the_fam.list_members.each { |peep_name|
-            peep = @the_fam.lookup(peep_name)
+        @@the_fam.list_members.each { |peep_name|
+            peep = @@the_fam.lookup(peep_name)
             results << peep.name if peep.children.empty?
         }
         results
@@ -77,9 +79,9 @@ class Lineage
     def biggest_grandparent
         most_gc = 0
         biggest_gp = ""
-        @the_fam.list_members.each { |peep_name|
+        @@the_fam.list_members.each { |peep_name|
             gc_count = 0
-            peep = @the_fam.lookup(peep_name)
+            peep = @@the_fam.lookup(peep_name)
             peep.children.each { |child|
                 gc_count += child.children.count
             }
@@ -91,6 +93,7 @@ class Lineage
         return [biggest_gp, most_gc]
     end
 end # /class lineage
+
 
 # main
 def menu
