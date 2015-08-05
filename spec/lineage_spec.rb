@@ -3,15 +3,17 @@ require 'lineage'
 
 describe "Testing lineage, main app" do
     let(:fam) {Lineage.new}
-
-
+    
     before(:each) do
         fam.parse_tree("family.txt")
     end
 
-    context "checking data parsing"
-        
-
+    context "checking data parsing" do
+        it "checking number of members" do
+            expect(fam.list_members.count).to be(14)
+        end
+    end
+    
     context "checking #show_grandparent"
         # for Kevin: Nancy
         # for Jill: unknown
