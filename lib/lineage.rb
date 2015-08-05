@@ -104,7 +104,8 @@ def biggest_grandparent
 end
 
 
-prompting = true
+prompting = (__FILE__ == $0)
+# will be false if run via rspec
 while prompting
     choice = menu
     case choice
