@@ -36,7 +36,6 @@ end
 
 
 def show_grandparent()
-    puts "Showing a grandparent."
     choice = false
     
     while !choice
@@ -65,7 +64,6 @@ end
 
 
 def list_no_siblings
-    puts "Listing members without siblings."
     results = []
     @the_fam.list_members.each { |peep_name|
         peep = @the_fam.lookup(peep_name)
@@ -74,23 +72,21 @@ def list_no_siblings
             results << peep.name
         end
     }
-    puts results.sort.join(", ")
+    results
 end
 
 
 def list_no_children
-    puts "Listing members without children."
     results = []
     @the_fam.list_members.each { |peep_name|
         peep = @the_fam.lookup(peep_name)
         results << peep.name if peep.children.empty?
     }
-    puts results.sort.join(", ")
+    results
 end
 
 
 def biggest_grandparent
-    puts "Who has the most grandchildren?"
     most_gc = 0
     biggest_gp = ""
     @the_fam.list_members.each { |peep_name|
@@ -104,7 +100,7 @@ def biggest_grandparent
             most_gc = gc_count
         end
     }
-    puts "#{biggest_gp} has the most grandchildren, at #{most_gc}."
+    return [biggest_gp, most_gc]
 end
 
 
@@ -113,13 +109,18 @@ while prompting
     choice = menu
     case choice
     when "1" # get grandparent for someone
+        puts "Showing a grandparent."
         show_grandparent
     when "2" # list of no siblings
-        list_no_siblings
+        puts "Listing members without siblings."
+        puts list_no_siblings.sort.join(", ")
     when "3" # list of no children
-        list_no_children
+        puts "Listing members without children."
+        puts list_no_children.sort.join(", ")
     when "4" # who has most grandchildren?
-        biggest_grandparent
+        puts "Who has the most grandchildren?"
+        biggest_gp, most_gc = biggest_grandparent
+        puts "#{biggest_gp} has the most grandchildren, at #{most_gc}."
     when "5" # draw family tree
         puts "Feature not implemented!"
     when "6", "q", "x" # exit
