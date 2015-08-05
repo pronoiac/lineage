@@ -20,8 +20,8 @@ class Lineage
     end # /parse_tree
 
 
-    def list_members()
-        puts @@the_fam.list_members.sort.join(", ")
+    def list_members
+        @@the_fam.list_members
     end
 
 
@@ -35,7 +35,7 @@ class Lineage
             return if name == "" # back to main menu
             if name == "list"
                 puts "Known family members: "
-                list_members
+                puts list_members.sort.join(", ")
             else 
                 choice = @@the_fam.lookup(name)
                 if !choice
@@ -55,7 +55,7 @@ class Lineage
 
     def list_no_siblings
         results = []
-        @@the_fam.list_members.each { |peep_name|
+        list_members.each { |peep_name|
             peep = @@the_fam.lookup(peep_name)
             rents = peep.parent
             if rents.nil? || rents.children.count == 1
@@ -68,7 +68,7 @@ class Lineage
 
     def list_no_children
         results = []
-        @@the_fam.list_members.each { |peep_name|
+        list_members.each { |peep_name|
             peep = @@the_fam.lookup(peep_name)
             results << peep.name if peep.children.empty?
         }
@@ -79,7 +79,7 @@ class Lineage
     def biggest_grandparent
         most_gc = 0
         biggest_gp = ""
-        @@the_fam.list_members.each { |peep_name|
+        list_members.each { |peep_name|
             gc_count = 0
             peep = @@the_fam.lookup(peep_name)
             peep.children.each { |child|
