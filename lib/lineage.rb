@@ -48,11 +48,15 @@ class Lineage
     
     def lookup_grandparent(name)
         choice = @@the_fam.lookup(name)
+        if !choice
+            return "Unknown member #{name}."
+        end
+
         parent = choice.parent
         if parent.nil? || parent.parent.nil?
             return "The grandparent of #{name} is unknown."
         else
-            return "#{parent.parent.name} is the grandparent of #{name}.\n"
+            return "#{parent.parent.name} is the grandparent of #{name}."
         end
     end
 
