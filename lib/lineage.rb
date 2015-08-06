@@ -1,10 +1,9 @@
 require_relative "family"
 require_relative "person"
-# require "byebug"
 
 class Lineage
     def initialize
-        @@the_fam = Family.new
+        @the_fam = Family.new
     end
 
     def parse_tree(filename)
@@ -15,20 +14,19 @@ class Lineage
             next if line =~ /^#/ || line =~ /^\s*$/
             child, parent = line.split(", ")
             # puts "#{parent} begat #{child}"
-            @@the_fam.add_parentage(child, parent)
+            @the_fam.add_parentage(child, parent)
         }
     end # /parse_tree
 
 
     def list_members
-        @@the_fam.list_members
+        @the_fam.list_members
     end
 
 
-    def show_grandparent()
-        choice = false
-        
-        while !choice
+    def show_grandparent
+        # this does some I/O.
+        while true
             puts "Whose grandparent do you want to know?"
             print '("list" for family members, or enter to return to main menu) '
             name = gets.chomp
@@ -37,18 +35,22 @@ class Lineage
                 puts "Known family members: "
                 puts list_members.sort.join(", ")
             else 
-                choice = @@the_fam.lookup(name)
-                if !choice
-                    puts "Unknown member."
-                end
+                puts lookup_grandparent(name)
             end
-        end # /choice
+        end # /loop
+    end
+    
+    def lookup_grandparent(name)
+        choice = @the_fam.lookup(name)
+        if !choice
+            return "Unknown member #{name}."
+        end
 
         parent = choice.parent
         if parent.nil? || parent.parent.nil?
-            puts "The grandparent of #{name} is unknown."
+            return "The grandparent of #{name} is unknown."
         else
-            puts "#{parent.parent.name} is the grandparent of #{name}.\n"
+            return "#{parent.parent.name} is the grandparent of #{name}."
         end
     end
 
@@ -56,7 +58,7 @@ class Lineage
     def list_no_siblings
         results = []
         list_members.each { |peep_name|
-            peep = @@the_fam.lookup(peep_name)
+            peep = @the_fam.lookup(peep_name)
             rents = peep.parent
             if rents.nil? || rents.children.count == 1
                 results << peep.name
@@ -69,7 +71,7 @@ class Lineage
     def list_no_children
         results = []
         list_members.each { |peep_name|
-            peep = @@the_fam.lookup(peep_name)
+            peep = @the_fam.lookup(peep_name)
             results << peep.name if peep.children.empty?
         }
         results
@@ -81,7 +83,7 @@ class Lineage
         biggest_gp = ""
         list_members.each { |peep_name|
             gc_count = 0
-            peep = @@the_fam.lookup(peep_name)
+            peep = @the_fam.lookup(peep_name)
             peep.children.each { |child|
                 gc_count += child.children.count
             }
@@ -99,7 +101,7 @@ end # /class lineage
 def menu
     puts <<EOM
 What do you want to know?
-    1. The grandparent of someone.
+    1. Look up grandparents.
     2. Who has no siblings?
     3. Who has no children?
     4. Who has the most grandchildren?
