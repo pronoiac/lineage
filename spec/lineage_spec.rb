@@ -14,7 +14,21 @@ describe "Testing lineage, main app" do
         end
     end
     
-    context "checking #show_grandparent"
+    context "checking #lookup_grandparent"
+        it "checking Kevin" do
+            expect(fam.lookup_grandparent("Kevin")).to eq "" +
+                "Nancy is the grandparent of Kevin."
+        end
+        
+        it "checking Jill" do
+            expect(fam.lookup_grandparent("Jill")).to eq "" +
+                "The grandparent of Jill is unknown."
+        end
+        
+        it "checking unknown" do
+            expect(fam.lookup_grandparent("Vandelay")).to eq "" +
+                "Unknown member Vandelay."
+        end
         # for Kevin: Nancy
         # for Jill: unknown
         # for, say, Vandelay: hmm.
