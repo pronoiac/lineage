@@ -110,6 +110,33 @@ EOM
     gets.chomp
 end # /menu
 
+def prompt_grandparent
+        choice = false
+        
+        while !choice
+            puts "Whose grandparent do you want to know?"
+            print '("list" for family members, or enter to return to main menu) '
+            name = gets.chomp
+            return if name == "" # back to main menu
+            if name == "list"
+                puts "Known family members: "
+                puts list_members.sort.join(", ")
+            else 
+                choice = @@the_fam.lookup(name)
+                if !choice
+                    puts "Unknown member."
+                end
+            end
+        end # /choice
+
+        parent = choice.parent
+        if parent.nil? || parent.parent.nil?
+            puts "The grandparent of #{name} is unknown."
+        else
+            puts "#{parent.parent.name} is the grandparent of #{name}.\n"
+        end
+end
+
 fam = Lineage.new
 fam.parse_tree("family.txt")
 prompting = (__FILE__ == $0)
