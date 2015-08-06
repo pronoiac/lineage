@@ -43,12 +43,16 @@ class Lineage
                 end
             end
         end # /choice
-
+        puts lookup_grandparent(name)
+    end
+    
+    def lookup_grandparent(name)
+        choice = @@the_fam.lookup(name)
         parent = choice.parent
         if parent.nil? || parent.parent.nil?
-            puts "The grandparent of #{name} is unknown."
+            return "The grandparent of #{name} is unknown."
         else
-            puts "#{parent.parent.name} is the grandparent of #{name}.\n"
+            return "#{parent.parent.name} is the grandparent of #{name}.\n"
         end
     end
 
