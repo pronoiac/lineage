@@ -26,9 +26,8 @@ class Lineage
 
 
     def show_grandparent()
-        choice = false
-        
-        while !choice
+        # this does some I/O.
+        while true
             puts "Whose grandparent do you want to know?"
             print '("list" for family members, or enter to return to main menu) '
             name = gets.chomp
@@ -37,13 +36,13 @@ class Lineage
                 puts "Known family members: "
                 puts list_members.sort.join(", ")
             else 
-                choice = @@the_fam.lookup(name)
-                if !choice
+                if @@the_fam.lookup(name)
+                    puts lookup_grandparent(name)
+                else 
                     puts "Unknown member."
                 end
             end
-        end # /choice
-        puts lookup_grandparent(name)
+        end # /loop
     end
     
     def lookup_grandparent(name)
@@ -107,7 +106,7 @@ end # /class lineage
 def menu
     puts <<EOM
 What do you want to know?
-    1. The grandparent of someone.
+    1. Look up grandparents.
     2. Who has no siblings?
     3. Who has no children?
     4. Who has the most grandchildren?
