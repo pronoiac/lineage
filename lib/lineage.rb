@@ -24,7 +24,7 @@ class Lineage
     end
 
 
-    def show_grandparent()
+    def show_grandparent
         # this does some I/O.
         while true
             puts "Whose grandparent do you want to know?"
@@ -35,11 +35,7 @@ class Lineage
                 puts "Known family members: "
                 puts list_members.sort.join(", ")
             else 
-                if @the_fam.lookup(name)
-                    puts lookup_grandparent(name)
-                else 
-                    puts "Unknown member."
-                end
+                puts lookup_grandparent(name)
             end
         end # /loop
     end
